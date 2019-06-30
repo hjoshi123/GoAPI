@@ -19,7 +19,6 @@ var CreateAccount = func(w http.ResponseWriter, r *http.Request) {
 
 	response := account.Create()
 	u.Response(w, response)
-
 }
 
 // Auth handles Authentication of the suer

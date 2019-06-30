@@ -12,9 +12,15 @@ import (
 
 func main() {
 	router := mux.NewRouter()
-	router.Use(app.JWTAuth)
+
 	router.HandleFunc("/api/user/new", controllers.CreateAccount).Methods("POST")
 	router.HandleFunc("/api/user/login", controllers.Auth).Methods("POST")
+	router.HandleFunc("/api/contacts/new", controllers.CreateContact).Methods("POST")
+	router.HandleFunc("/api/me/contacts", controllers.GetContactsForUser).Methods("GET")
+
+	router.Use(app.JWTAuth)
+
+	router.NotFoundHandler = http.HandlerFunc(app.ErrorHandler)
 
 	port := os.Getenv("PORT")
 	if port == "" {
