@@ -55,7 +55,8 @@ var JWTAuth = func(next http.Handler) http.Handler {
 			return []byte(os.Getenv("token_password")), nil
 		})
 
-		if err != nil { //Malformed token, returns with http code 403 as usual
+		if err != nil {
+			//Malformed token, returns with http code 403 as usual
 			response = u.Message(false, "Malformed authentication token")
 			w.WriteHeader(http.StatusForbidden)
 			w.Header().Add("Content-Type", "application/json")
@@ -63,7 +64,8 @@ var JWTAuth = func(next http.Handler) http.Handler {
 			return
 		}
 
-		if !token.Valid { //Token is invalid, maybe not signed on this server
+		if !token.Valid {
+			//Token is invalid, maybe not signed on this server
 			response = u.Message(false, "Token is not valid.")
 			w.WriteHeader(http.StatusForbidden)
 			w.Header().Add("Content-Type", "application/json")
