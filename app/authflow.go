@@ -75,8 +75,6 @@ var JWTAuth = func(next http.Handler) http.Handler {
 
 		// proceed with the request and set the caller to the user retrieved from the parsed token
 		fmt.Sprintf("User %", tk.UserID) // Debug
-		type user string
-		const userString user = "user"
 		ctx := context.WithValue(r.Context(), "user", tk.UserID)
 		r = r.WithContext(ctx)
 		next.ServeHTTP(w, r) //proceed in the middleware chain!
