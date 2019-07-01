@@ -6,12 +6,12 @@ services:
       POSTGRES_DB: contacts
       POSTGRES_USER: test
       POSTGRES_PASSWORD: test143
-      db_host: localhost
+      db_host: db
     ports:
       - 5432:5432
   app:
     build: .
-    command: ["./wait-for-it.sh", "db:5432", "--", "./GORest"]
+    command: ["./GORest"]
     ports: 
       - "8080:8080"
     depends_on:
